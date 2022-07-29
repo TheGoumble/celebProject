@@ -34,3 +34,25 @@ export function createCeleb(req, res){
   })
   .catch((err) => handleError(err, res))
 }
+
+export function updateCeleb(req, res){
+  // destructor 
+  const {id} = req.params
+  let patchCeleb = req.body
+  db.collection("celebrities")
+  .doc(id)
+  .update(patchCeleb)
+  .then((doc) => {
+    res.status(202).send({
+      success: true,
+      id: doc.id,
+    })
+  })
+
+  .catch((err) => handleError(err, res))
+}
+
+// export function deleteCeleb(req, res){
+//   // the doc
+//   //https://firebase.google.com/docs/firestore/manage-data/delete-data
+// }
